@@ -30,7 +30,7 @@ function gq {
 function gqm {
   git add . &&
   git commit -m "$@" &&
-  gpu
+  git push
 }
 # git current branch
 function currentBranch {
