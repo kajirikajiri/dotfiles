@@ -1,6 +1,9 @@
 #...
 
 DOTPATH=~/.dotfiles
+has() {
+    type "${1:?too few arguments}" &>/dev/null
+}
 
 # git が使えるなら git
 if has "git"; then
