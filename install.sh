@@ -1,6 +1,6 @@
 #...
 
-DOTPATH=~/.ghq/github/kajirikajiri/dotfiles
+DOTPATH=~/.ghq/github.com/kajirikajiri/dotfiles
 has() {
     type "${1:?too few arguments}" &>/dev/null
 }
