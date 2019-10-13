@@ -10,4 +10,3 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 export PATH="/Users/kazukinakamura/.ebcli-virtual-env/executables:$PATH"
-alias gpu="git push"
