@@ -24,7 +24,7 @@ function gcobi () {
 function gq {
     git add .
     git commit -m "Quick update"
-    gpu
+    git push
 }
 # git quick push add message
 function gqm {
