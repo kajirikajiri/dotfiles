@@ -1,5 +1,3 @@
-# clipboard vim
-set clipboard+=unnamed
 # mkdir && change directory
 function mkdircd { mkdir -p "$@" && eval cd "\"\$$#\""; }
 # git checkout feature/issue-
@@ -186,6 +184,9 @@ function vm {
   cd /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report && c.
 }
 
+# clipboard vim
+
+# default
 alias l='ls -al'
 alias pag='ps aux | grep'
 
@@ -273,16 +274,10 @@ alias td="touch /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report/
 #alias soba='source ~/.zprofile'
 alias dev="cd ~/dev"
 alias croncreate="crontab ~/.ghq/github.com/kajirikajiri/cron_zsh/cron.edit && crontab -l"
-# max save history size
-HISTSIZE=5000000
-HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
 
 # vscode
 #alias c.='code --add .'
 alias c.='code .'
-
-# clipboard ues vim
-set clipboard=unnamed,autoselect
 
 
 
@@ -327,7 +322,7 @@ export LANG=ja_JP.UTF-8
 HISTSIZE=1000000
 SAVEHIST=1000000
 HISTTIMEFORMAT='[%Y/%m/%d %H:%M:%S] '
-HISTFILE=.zhistory
+HISTFILE=~/.zhistory
 #alias soba='source /Users/kazukinakamura/.ghq/github.com/kajirikajiri/soba-viba/.zshrc'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
