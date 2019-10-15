@@ -178,10 +178,10 @@ bindkey '^R' history-fzf
 
 # open multiple vscode
 function vm {
-  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-frontend && c. &&
-  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-api && c. &&
-  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/team-docs && c. &&
-  cd /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report && c.
+  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-frontend && code . &&
+  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-api && code . &&
+  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/team-docs && code . &&
+  cd /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report && code .
 }
 
 # clipboard vim
