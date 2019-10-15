@@ -88,8 +88,8 @@ function precmd {
 }
 # git checkout master
 function gcom {
-  gco master
-  gp
+  git checkout master &&
+  git pull
 }
 # git checkout .
 function gco. {
