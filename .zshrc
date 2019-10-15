@@ -93,7 +93,7 @@ function gcom {
 }
 # git checkout .
 function gco. {
-  gco .
+  git checkout .
 }
 # git branch get all
 function gbag {
