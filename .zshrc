@@ -14,7 +14,7 @@ function gcobf {
 }
 # git checkout -b issue-
 function gcobi () {
-    echo "now $(currentBranch)\ny/n[issue]"
+    echo "$(currentBranch) -> issue-$@\ny/n"
     if read -q; then
         echo "\n"
         git checkout -b issue-"$@";
