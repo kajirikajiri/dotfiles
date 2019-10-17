@@ -65,5 +65,5 @@ set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " vim clipboar
 set clipboard+=unnamed
-" set sintax highlight
-syntax on
+" 自動でインデントを設定
+set autoindent
