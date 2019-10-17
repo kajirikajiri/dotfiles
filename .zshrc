@@ -343,6 +343,8 @@ alias fuck-rails="pkill -9 -f 'rb-fsevent|rails|spring|puma'"
 alias lockedprod="sudo ssh -i ~/Downloads/demo.pem ec2-user@52.69.93.180"
 alias locked='cd /Users/kazukinakamura/Desktop/workdir/work/v001_locked/locked'
 alias lockeddeploy="sudo ssh -i ~/Downloads/demo.pem ec2-user@52.69.93.180"
+alias cdndev='npm run build:dev && npm run build-push'
+
 
 ## path
 export ANDROID_HOME=$HOME/Library/Android/sdk
