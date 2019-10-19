@@ -359,4 +359,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # use emacs move
 bindkey -e
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey '^j' vi-cmd-mode
 
