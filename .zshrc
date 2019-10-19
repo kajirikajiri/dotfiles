@@ -6,7 +6,7 @@ function gcof { git checkout feature/issue-"$@" }
 function gcoi { git checkout issue-"$@" }
 # git checkout -b feature/issue-
 function gcobf {
-    echo "pullしましたか?ブランチは正しいですか?y/n[feature/issue]"
+    echo "$(currentBranch) -> feature/issue-$@\ny/n"
     if read -q; then
         echo "\n"
         git checkout -b feature/issue-"$@";
@@ -72,8 +72,8 @@ fi
 alias -s {png,jpg,bmp,PNG,JPG,BMP}=eog
 
 function preexec {
-   _prev_cmd_start_time=$SECONDS
-   _cmd_is_running=true
+  _prev_cmd_start_time=$SECONDS
+  _cmd_is_running=true
 }
 function precmd {
   #send_slack
