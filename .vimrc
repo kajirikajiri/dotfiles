@@ -68,3 +68,5 @@ set clipboard+=unnamed
 " 自動でインデントを設定
 set autoindent
 
+NeoBundle 'Lokaltog/vim-easymotion'
+
