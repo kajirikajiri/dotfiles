@@ -67,3 +67,4 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set clipboard+=unnamed
 " 自動でインデントを設定
 set autoindent
+
