@@ -68,3 +68,9 @@ set clipboard+=unnamed
 " 自動でインデントを設定
 set autoindent
 
+call plug#begin('~/.vim/plugged')
+Plug 'easymotion/vim-easymotion'
+call plug#end()
+
+let g:EasyMotion_do_mapping = 0 "Disable default mappings
+nmap s <Plug>(easymotion-s2)
