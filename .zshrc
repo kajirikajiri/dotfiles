@@ -243,6 +243,7 @@ alias dc="$dc"
 alias dcn="$dcn"
 alias dexec="$d exec -it"
 alias dcrr="$dc run --rm"
+alias dcd="$dc down"
 alias dck="$dc kill"
 alias dcs="$dc stop"
 alias dcu="$dc up"
@@ -250,6 +251,7 @@ alias dcb="$dcb"
 alias dcbn="$dcb --no-cache"
 alias dcp="$dc ps"
 alias dcr="$dc restart"
+alias dcrm="$dc rm"
 alias dcimage='docker run --rm -it --name dcv -v $(pwd):/input pmsipilot/docker-compose-viz render -m image docker-compose.yml'
 
 # react-native
