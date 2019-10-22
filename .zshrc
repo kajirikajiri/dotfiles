@@ -363,7 +363,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/tools:/platform-tools:
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # use emacs move
-bindkey -e
+#bindkey -e
 
 # use vim commandline
 bindkey '^[' vi-cmd-mode
