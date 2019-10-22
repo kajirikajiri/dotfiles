@@ -1,3 +1,4 @@
+echo hello zshrc
 # mkdir && change directory
 function mkdircd { mkdir -p "$@" && eval cd "\"\$$#\""; }
 # git checkout feature/issue-
