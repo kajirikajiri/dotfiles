@@ -181,6 +181,8 @@ function vm {
   cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-frontend && code . &&
   cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-api && code . &&
   cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/team-docs && code . &&
+  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked_cdn && code . &&
+  cd /Users/kazukinakamura/.ghq/github.com/OnetapInc/locked-rails-web-sample && code . &&
   cd /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report && code .
 }
 
