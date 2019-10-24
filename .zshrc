@@ -285,7 +285,8 @@ alias croncreate="crontab ~/.ghq/github.com/kajirikajiri/cron_zsh/cron.edit && c
 #alias c.='code --add .'
 alias c.='code .'
 
-
+# vim indent fix
+alias vip='echo -e "G=gg\n:wq\n" | vim'
 
 
 ##### zsh default & work
