@@ -287,7 +287,7 @@ alias c.='code .'
 
 # vim indent fix
 function vip {
-  echo -e "G=gg\n:wq\n" | vim $@ && bg
+  echo -e "G=gg\n:wq\n" | vim $@
 }
 
 ##### zsh default & work
