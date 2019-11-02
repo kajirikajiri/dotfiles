@@ -1,35 +1,3 @@
-alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
-_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
-
-# fcoc_preview - checkout git commit with previews
-fcoc_preview() {
-  local commit
-    commit=$( glNoGraph |
-        fzf --no-sort --reverse --tiebreak=index --no-multi \
-                --ansi --preview="$_viewGitLogLine" ) &&
-                  git checkout $(echo "$commit" | sed "s/ .*//")
-                  }
-
-                  # fshow_preview - git commit browser with previews
-                  fshow_preview() {
-                      glNoGraph |
-                              fzf --no-sort --reverse --tiebreak=index --no-multi \
-                                          --ansi --preview="$_viewGitLogLine" \
-                                                          --header "enter to view, alt-y to copy hash" \
-                                                                          --bind "enter:execute:$_viewGitLogLine   | less -R" \
-                                                                                          --bind "alt-y:execute:$_gitLogLineToHash | xclip"
-                                                                                          }
-fshow() {
-  git log --graph --color=always \
-    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-    --bind "ctrl-m:execute:
-      (grep -o '[a-f0-9]\{7\}' | head -1 |
-        xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-              {}
-              FZF-EOF"
-            }
 # mkdir && change directory
 function mkdircd { mkdir -p "$@" && eval cd "\"\$$#\""; }
 # git checkout feature/issue-
@@ -234,7 +202,7 @@ alias t='testcafe chrome'
 alias g='git'
 alias gs='git status'
 alias gst='git status -sb'
-alias ga='git add'
+# alias ga='git add'
 alias gau='git add -u' # Removes deleted files
 alias gap='git add -p'
 alias gp='git pull'
@@ -247,7 +215,7 @@ alias gcofull="git checkout other/full-renewal"
 alias gcosmall="git checkout other/small-renewal"
 alias gcob='git checkout -b'
 alias gl='git log'
-alias glo='git log --oneline -20'
+# alias glo='git log --oneline -20'
 alias gla='git log --pretty="format:%C(yellow)%h %C(green)%cd %C(reset)%s %C(red)%d %C(cyan)[%an]" --date=iso --all --graph'
 alias glp='git log -p'
 alias gb='git branch'
