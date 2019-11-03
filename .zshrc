@@ -360,7 +360,7 @@ alias cdndev='npm run build:dev && npm run build-push'
 ## path
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export GOROOT=/usr/local/Cellar/go@1.11/1.11.6/libexec
-export GOPATH=$HOME
+export GOPATH=$HOME/go
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/tools:/platform-tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$GOROOT/bin:$GOPATH/bin:$HOME/.nodebrew/current/bin:"/usr/local/opt/go@1.11/bin":/usr/local:$ANDROID_HOME/emulator
 #rbenv
 [[ -d ~/.rbenv  ]] && \
