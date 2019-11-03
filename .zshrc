@@ -281,6 +281,9 @@ alias td="touch /Users/kazukinakamura/.ghq/github.com/kajirikajiri/daily_report/
 alias dev="cd ~/dev"
 alias croncreate="crontab ~/.ghq/github.com/kajirikajiri/cron_zsh/cron.edit && crontab -l"
 
+# alias trans
+alias te='trans en:ja'
+alias tj='trans ja:en'
 # vscode
 #alias c.='code --add .'
 alias c.='code .'
