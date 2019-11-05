@@ -203,6 +203,7 @@ alias g='git'
 alias gs='git status'
 alias gst='git status -sb'
 # alias ga='git add'
+alias ga.='git add .'
 alias gau='git add -u' # Removes deleted files
 alias gap='git add -p'
 alias gp='git pull'
