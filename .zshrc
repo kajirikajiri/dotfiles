@@ -65,6 +65,13 @@ function gqh {
     cd $currentDirectory
 }
 
+# git pull all
+function gpa {
+  for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
+  git fetch --all
+  git pull --all
+}
+
 # image open suffix
 if [ `uname` = "Darwin" ]; then
   alias eog='open -a Preview'
