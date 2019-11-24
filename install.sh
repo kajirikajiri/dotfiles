@@ -108,6 +108,6 @@ if has "ghq"; then
 elif has "git"; then
     echo 'ghq notfound... but, git present! fzf install!!'
     mkdir ghq && cd ghq
-    git clone https://github.com/motemen/ghq ./ghq
+    git clone https://github.com/motemen/ghq .
     make install
 fi
