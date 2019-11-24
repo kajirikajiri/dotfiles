@@ -4,7 +4,7 @@ DOTPATH=~/.dotfiles
 GITHUB_URL=http://github.com/kajirikajiri/dotfiles.git
 # is_exists returns true if executable $1 exists in $PATH
 is_exists() {
-    which "$1" >/dev/null 2>&1
+    type "$1" >/dev/null 2>&1
     return $?
 }
 # has is wrapper function
@@ -23,6 +23,7 @@ if has "git"; then
 
 # 使えない場合は curl か wget を使用する
 elif has "curl" || has "wget"; then
+    echo 'git isnt present... , but curl or wget are present!!'
     tarball="https://github.com/kajirikajiri/dotfiles/archive/master.tar.gz"
 
     # どっちかでダウンロードして，tar に流す
@@ -53,3 +54,15 @@ do
 
     ln -snfv "$DOTPATH/$f" "$HOME/$f"
 done
+
+# zshがなければinstallする
+if has "zsh"; then
+    echo 'zsh is present!'
+    git clone --recursive "$GITHUB_URL" "$DOTPATH"
+
+# ない場合はinstallする
+elif has "apt-get"; then
+    echo 'zsh isnt present... , but apt-get present!'
+    apt-get update
+    apt-get install -y zsh
+fi
