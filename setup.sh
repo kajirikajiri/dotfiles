@@ -65,8 +65,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # ない場合はinstallする
     elif has "apt"; then
         echo 'install zsh'
-        apt update
-        apt install -y zsh
+        sudo apt update
+        sudo apt install -y zsh
         chsh -s /usr/bin/zsh || true # for skipping in CI
     fi
 
