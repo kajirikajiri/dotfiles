@@ -58,11 +58,21 @@ done
 # zshがなければinstallする
 if has "zsh"; then
     echo 'zsh is present!'
-    git clone --recursive "$GITHUB_URL" "$DOTPATH"
 
 # ない場合はinstallする
 elif has "apt-get"; then
     echo 'zsh isnt present... , but apt-get present!'
     apt-get update
     apt-get install -y zsh
+fi
+
+# vimがなければinstallする
+if has "vim"; then
+    echo 'vim is present!'
+
+# ない場合はinstallする
+elif has "apt-get"; then
+    echo 'vim isnt present... , but apt-get present!'
+    apt-get update
+    apt-get install -y vim
 fi
