@@ -1,4 +1,5 @@
 #...
+set -eu
 
 DOTPATH=~/.dotfiles
 GITHUB_URL=http://github.com/kajirikajiri/dotfiles.git
