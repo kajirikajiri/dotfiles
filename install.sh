@@ -89,36 +89,38 @@ if has "git"; then
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
 
+
+## うまくいかね
 # fzfをインストールする
-if has "fzf"; then
-    echo 'fzf is present!'
+# if has "fzf"; then
+#     echo 'fzf is present!'
 
-# ない場合はinstallする
-elif has "apt-get"; then
-    echo 'fzf install'
-    apt-get update
-    apt-get install fzf
-fi
+# # ない場合はinstallする
+# elif has "apt-get"; then
+#     echo 'fzf install'
+#     apt-get update
+#     apt-get install fzf
+# fi
 
-# ghqをインストールする
-if has "ghq"; then
-    echo 'ghq is present!'
+# # ghqをインストールする
+# if has "ghq"; then
+#     echo 'ghq is present!'
 
-# ない場合はinstallする
-elif has "git"; then
-    if has "go"; then
-        echo 'go is present!'
-    elif has "wget"; then
-        wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
-        tar -xvf go1.13.3.linux-amd64.tar.gz
-        mv go /usr/local
-        export GOROOT=/usr/local/go
-        . ~/.zshrc
-        echo 'installed golang'
-        echo 'ghq notfound... but, git present! ghq install!!'
-        mkdir ghq && cd ghq
-        git clone https://github.com/motemen/ghq .
-        make install
-    fi
+# # ない場合はinstallする
+# elif has "git"; then
+#     if has "go"; then
+#         echo 'go is present!'
+#     elif has "wget"; then
+#         wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+#         tar -xvf go1.13.3.linux-amd64.tar.gz
+#         mv go /usr/local
+#         export GOROOT=/usr/local/go
+#         . ~/.zshrc
+#         echo 'installed golang'
+#         echo 'ghq notfound... but, git present! ghq install!!'
+#         mkdir ghq && cd ghq
+#         git clone https://github.com/motemen/ghq .
+#         make install
+#     fi
 
-fi
+# fi
