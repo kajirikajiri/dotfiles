@@ -58,6 +58,7 @@ do
 done
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo 'linux-gnu'
     # zshがなければinstallする
     if has "zsh"; then
         echo 'zsh is present!'
@@ -80,7 +81,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install zsh vim ghq fzf
+    echo 'darwin'
+    brew install zsh vim ghq fzf tmux
 fi
 
 # vim-plugをインストールする
