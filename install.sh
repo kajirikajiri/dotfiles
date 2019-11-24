@@ -96,7 +96,7 @@ if has "fzf"; then
 # ない場合はinstallする
 elif has "apt-get"; then
     echo 'fzf install'
-    apt-get updata
+    apt-get update
     apt-get install fzf
 fi
 
@@ -107,6 +107,7 @@ if has "ghq"; then
 # ない場合はinstallする
 elif has "git"; then
     echo 'ghq notfound... but, git present! fzf install!!'
-    git clone https://github.com/motemen/ghq .
+    mkdir ghq && cd ghq
+    git clone https://github.com/motemen/ghq ./ghq
     make install
 fi
