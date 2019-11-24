@@ -87,7 +87,6 @@ if has "git"; then
     echo 'install zplugin'
     mkdir ~/.zplugin
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
-    . ~/.zplugin/bin/zplugin.zsh
 fi
 
 # fzfをインストールする
