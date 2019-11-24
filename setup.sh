@@ -59,6 +59,7 @@ done
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo 'linux-gnu'
+    
     # sudoがなければinstallする
     if has "sudo"; then
         echo 'sudo is present!'
@@ -67,6 +68,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         apt updata
         apt install -y sudo
     fi
+    
     # zshがなければinstallする
     if has "zsh"; then
         echo 'zsh is present!'
@@ -88,6 +90,21 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         sudo apt install -y vim
     fi
     
+    # vim-plugをインストールする
+    if has "curl"; then
+        echo 'install vim-plug'
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+    
+    # zpluginをインストールする
+    if has "git"; then
+        echo 'install zplugin'
+        mkdir ~/.zplugin
+        git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+    fi
+    
+    # tmuxをインストールする
     if has "tmux"; then
         echo 'tmux is present!'
     elif has "apt"; then
@@ -101,17 +118,20 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'darwin'
     brew install zsh vim ghq fzf tmux
+    
+    # vim-plugをインストールする
+    if has "curl"; then
+        echo 'install vim-plug'
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+    
+    # zpluginをインストールする
+    if has "git"; then
+        echo 'install zplugin'
+        mkdir ~/.zplugin
+        git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+    fi
+
 fi
 
-# vim-plugをインストールする
-if has "curl"; then
-    echo 'install vim-plug'
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-    # zpluginをインストールする
-if has "git"; then
-    echo 'install zplugin'
-    mkdir ~/.zplugin
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
-fi
