@@ -83,5 +83,5 @@ elif has "apt-get"; then
     mkdir ~/.zplugin
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
     # defaultでzshを使う
-    chsh -s /usr/local/bin/zsh || true # for skipping in CI
+    chsh -s /usr/bin/zsh || true # for skipping in CI
 fi
