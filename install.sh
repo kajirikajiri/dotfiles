@@ -83,7 +83,7 @@ elif has "apt-get"; then
     apt-get install -y vim
 fi
 # zpluginをインストールする
-if has "git": then
+if has "git"; then
     echo 'install zplugin'
     mkdir ~/.zplugin
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
