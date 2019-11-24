@@ -63,10 +63,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     if has "zsh"; then
         echo 'zsh is present!'
     # ない場合はinstallする
-    elif has "apt-get"; then
+    elif has "apt"; then
         echo 'install zsh'
-        apt-get update
-        apt-get install -y zsh
+        apt update
+        apt install -y zsh
         chsh -s /usr/bin/zsh || true # for skipping in CI
     fi
 
@@ -74,10 +74,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     if has "vim"; then
         echo 'vim is present!'
     # ない場合はinstallする
-    elif has "apt-get"; then
+    elif has "apt"; then
         echo 'install vim'
-        apt-get update
-        apt-get install -y vim
+        apt update
+        apt install -y vim
     fi
     
     if has "tmux"; then
