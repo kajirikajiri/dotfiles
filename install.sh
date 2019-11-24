@@ -113,6 +113,7 @@ elif has "git"; then
         tar -xvf go1.13.3.linux-amd64.tar.gz
         mv go /usr/local
         export GOROOT=/usr/local/go
+        . ~/.zshrc
         echo 'installed golang'
         echo 'ghq notfound... but, git present! ghq install!!'
         mkdir ghq && cd ghq
