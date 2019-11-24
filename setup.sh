@@ -59,6 +59,14 @@ done
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo 'linux-gnu'
+    # sudoがなければinstallする
+    if has "sudo"; then
+        echo 'sudo is present!'
+    elif has "apt"; then
+        echo 'install sudo'
+        apt updata
+        apt install -y sudo
+    fi
     # zshがなければinstallする
     if has "zsh"; then
         echo 'zsh is present!'
