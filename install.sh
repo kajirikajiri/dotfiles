@@ -64,7 +64,10 @@ elif has "apt-get"; then
     echo 'zsh isnt present... , but apt-get present! install zsh!!'
     apt-get update
     apt-get install -y zsh
-    # vim-plugをインストールする
+    chsh -s /usr/bin/zsh || true # for skipping in CI
+fi
+# vim-plugをインストールする
+if has "curl"; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
@@ -78,10 +81,32 @@ elif has "apt-get"; then
     echo 'vim isnt present... , but apt-get present! install vim!!'
     apt-get update
     apt-get install -y vim
-    # install zplugin
+fi
+# zpluginをインストールする
+if has "git": then
     echo 'install zplugin'
     mkdir ~/.zplugin
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
-    # defaultでzshを使う
-    chsh -s /usr/bin/zsh || true # for skipping in CI
+fi
+
+# fzfをインストールする
+if has "fzf"; then
+    echo 'fzf is present!'
+
+# ない場合はinstallする
+elif has "apt-get"; then
+    echo 'fzf install'
+    apt-get updata
+    apt-get install fzf
+fi
+
+# ghqをインストールする
+if has "ghq"; then
+    echo 'ghq is present!'
+
+# ない場合はinstallする
+elif has "git"; then
+    echo 'ghq notfound... but, git present! fzf install!!'
+    git clone https://github.com/motemen/ghq .
+    make install
 fi
