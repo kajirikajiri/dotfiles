@@ -114,9 +114,10 @@ elif has "git"; then
     elif has "wget"; then
         wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
         tar -xvf go1.13.3.linux-amd64.tar.gz
+        mv go /usr/local/
         echo 'installed golang'
         echo 'ghq notfound... but, git present! ghq install!!'
         mkdir ghq && cd ghq
-        go/bin/go get github.com/motemen/ghq
+        /usr/local/go/bin/go get github.com/motemen/ghq
     fi
 fi
