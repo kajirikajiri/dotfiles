@@ -7,7 +7,7 @@ jobs:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Run setup.sh
+    - name: Run ./setup.sh
       run: |
         setup.sh
 #     - name: Run macos setup.sh
