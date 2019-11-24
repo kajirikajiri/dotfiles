@@ -59,18 +59,18 @@ done
 # zshがなければinstallする
 if has "zsh"; then
     echo 'zsh is present!'
-
 # ない場合はinstallする
 elif has "apt-get"; then
-    echo 'zsh isnt present... , but apt-get present! install zsh!!'
+    echo 'install zsh'
     apt-get update
     apt-get install -y zsh
     chsh -s /usr/bin/zsh || true # for skipping in CI
 fi
-# vim-plugをインストールする
-if has "curl"; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# zpluginをインストールする
+if has "git"; then
+    echo 'install zplugin'
+    mkdir ~/.zplugin
+    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
 
 # vimがなければinstallする
@@ -79,16 +79,17 @@ if has "vim"; then
 
 # ない場合はinstallする
 elif has "apt-get"; then
-    echo 'vim isnt present... , but apt-get present! install vim!!'
+    echo 'install vim'
     apt-get update
     apt-get install -y vim
 fi
-# zpluginをインストールする
-if has "git"; then
-    echo 'install zplugin'
-    mkdir ~/.zplugin
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+# vim-plugをインストールする
+if has "curl"; then
+    echo 'install vim-plug'
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+
 
 
 ## うまくいかね
