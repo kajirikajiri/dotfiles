@@ -61,7 +61,7 @@ if has "zsh"; then
 
 # ない場合はinstallする
 elif has "apt-get"; then
-    echo 'zsh isnt present... , but apt-get present!'
+    echo 'zsh isnt present... , but apt-get present! install zsh!!'
     apt-get update
     apt-get install -y zsh
 fi
@@ -72,7 +72,11 @@ if has "vim"; then
 
 # ない場合はinstallする
 elif has "apt-get"; then
-    echo 'vim isnt present... , but apt-get present!'
+    echo 'vim isnt present... , but apt-get present! install vim!!'
     apt-get update
     apt-get install -y vim
+    # install zplugin
+    echo 'install zplugin'
+    mkdir ~/.zplugin
+    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
