@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v
+    - uses: actions/checkout@v1
     - name: Run setup.sh
       run: |
         ./setup.sh
