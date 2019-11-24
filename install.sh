@@ -64,6 +64,9 @@ elif has "apt-get"; then
     echo 'zsh isnt present... , but apt-get present! install zsh!!'
     apt-get update
     apt-get install -y zsh
+    # vim-plugをインストールする
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # vimがなければinstallする
