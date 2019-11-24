@@ -104,25 +104,20 @@ fi
 #     apt-get install fzf
 # fi
 
-# # ghqをインストールする
-# if has "ghq"; then
-#     echo 'ghq is present!'
+# ghqをインストールする
+if has "ghq"; then
+    echo 'ghq is present!'
 
-# # ない場合はinstallする
-# elif has "git"; then
-#     if has "go"; then
-#         echo 'go is present!'
-#     elif has "wget"; then
-#         wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
-#         tar -xvf go1.13.3.linux-amd64.tar.gz
-#         mv go /usr/local
-#         export GOROOT=/usr/local/go
-#         . ~/.zshrc
-#         echo 'installed golang'
-#         echo 'ghq notfound... but, git present! ghq install!!'
-#         mkdir ghq && cd ghq
-#         git clone https://github.com/motemen/ghq .
-#         make install
-#     fi
-
-# fi
+# ない場合はinstallする
+elif has "git"; then
+    if has "go"; then
+        echo 'go is present!'
+    elif has "wget"; then
+        wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+        tar -xvf go1.13.3.linux-amd64.tar.gz
+        echo 'installed golang'
+        echo 'ghq notfound... but, git present! ghq install!!'
+        mkdir ghq && cd ghq
+        go/bin/go get github.com/motemen/ghq
+    fi
+fi
