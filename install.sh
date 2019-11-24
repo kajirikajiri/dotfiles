@@ -1,7 +1,7 @@
 #...
 
 DOTPATH=~/.dotfiles
-GITHUB_URL=git@github.com:kajirikajiri/dotfiles.git
+GITHUB_URL=http://github.com/kajirikajiri/dotfiles.git
 # is_exists returns true if executable $1 exists in $PATH
 is_exists() {
     which "$1" >/dev/null 2>&1
