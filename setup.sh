@@ -79,6 +79,16 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         apt-get update
         apt-get install -y vim
     fi
+    
+    if has "tmux"; then
+        echo 'tmux is present!'
+    elif has "apt"; then
+        echo 'install tmux'
+        apt update
+        apt install -y tmux
+        apt search locales
+        apt install locales-all
+    fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'darwin'
