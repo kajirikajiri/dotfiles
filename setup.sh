@@ -65,7 +65,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo 'sudo is present!'
     elif has "apt"; then
         echo 'install sudo'
-        apt updata
+        apt update
         apt install -y sudo
     fi
     
