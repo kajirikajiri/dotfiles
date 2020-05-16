@@ -1,3 +1,4 @@
+sudo chsh $USER -s $(which zsh)
 # .zsh read http://fnwiya.hatenablog.com/entry/2015/11/03/191902
 ZSHHOME="${HOME}/.zsh.d"
 
