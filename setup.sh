@@ -143,12 +143,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     if has "fzf"; then
         echo 'fzf is present!'
     # ない場合はinstallする
-    elif has "apt-get"; then
+    elif has "git"; then
         echo 'install fzf'
-        sudo apt update
-        sudo apt-get install -y fzf
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
     else
-        echo 'fzf, apt-get not found'
+        echo 'fzf, git not found'
     fi
     
 elif [[ "$OSTYPE" == "darwin"* ]]; then
