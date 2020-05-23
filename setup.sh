@@ -68,15 +68,31 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         apt update
         apt install -y sudo
     fi
-
-    sudo apt update && sudo apt upgrade
-    sudo apt-get install build-essential curl file git
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     
-    brew install zsh vim ghq fzf tmux go zplug
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    # zshがなければinstallする
+    if has "zsh"; then
+        echo 'zsh is present!'
+    # ない場合はinstallする
+    elif has "apt"; then
+        echo 'install zsh'
+        sudo apt update
+        sudo apt install -y zsh
+        chsh -s /usr/bin/zsh || true # for skipping in CI
+    else
+        echo 'zsh, apt not found'
+    fi
+
+    # vimがなければinstallする
+    if has "vim"; then
+        echo 'vim is present!'
+    # ない場合はinstallする
+    elif has "apt"; then
+        echo 'install vim'
+        sudo apt update
+        sudo apt install -y vim
+    else
+        echo 'vim, apt not found'
+    fi
     
     # vim-plugをインストールする
     if has "curl"; then
@@ -86,17 +102,61 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     else
         echo 'curl not found'
     fi
+    
+    # zplugをインストールする
+    if has "curl"; then
+        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    else
+        echo 'curl not found'
+    fi
+    
+    # tmuxをインストールする
+    if has "tmux"; then
+        echo 'tmux is present!'
+    elif has "apt"; then
+        echo 'install tmux'
+        sudo apt update
+        sudo apt install -y tmux
+        sudo apt search locales
+        sudo apt install locales-all
+    else
+        echo 'tmux apt not found'
+    fi
 
+        
+    # golangがなければinstallする
+    if has "go"; then
+        echo 'go is present!'
+    # ない場合はinstallする
+    elif has "apt"; then
+        echo 'install go'
+        sudo apt update
+        sudo apt install -y golang
+        go get github.com/x-motemen/ghq
+    else
+        echo 'go, apt not found'
+    fi
+    
+    # fzfがなければinstallする
+    if has "fzf"; then
+        echo 'fzf is present!'
+    # ない場合はinstallする
+    elif has "git"; then
+        echo 'install fzf'
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+    else
+        echo 'fzf, git not found'
+    fi
+    
     # 言語ファイルをダウンロード
     if has "apt"; then
         sudo apt install locales-all
-    else
-        echo 'apt not found'
     fi
     
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'darwin'
-    brew install zsh vim ghq fzf tmux go zplug
+    brew install zsh vim ghq fzf tmux
     
     # vim-plugをインストールする
     if has "curl"; then
@@ -104,6 +164,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
+    
+    # zplugをインストールする
+    if has "curl"; then
+        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    else
+        echo 'curl not found'
+    fi
 
 fi
-
