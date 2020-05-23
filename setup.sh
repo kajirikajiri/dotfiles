@@ -151,6 +151,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo 'fzf, git not found'
     fi
     
+    # 言語ファイルをダウンロード
+    if has "apt"; then
+        sudo apt install locales-all
+    fi
+    
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'darwin'
     brew install zsh vim ghq fzf tmux
