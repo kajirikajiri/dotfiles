@@ -74,6 +74,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
     test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    echo "eval $($(brew --prefix)/bin/brew shellenv)" >>~/.zshrc
 
     brew install zsh vim ghq fzf tmux go
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
