@@ -75,7 +75,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
     test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     
-    brew install zsh vim ghq fzf tmux go
+    brew install zsh vim ghq fzf tmux go zplug
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
     
     # vim-plugをインストールする
@@ -106,3 +106,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
 fi
+
+zsh
+vim
+ghq
+fzf
+tmux
+go
+zplug
