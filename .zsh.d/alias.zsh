@@ -281,32 +281,6 @@ function vip {
   echo -e "G=gg\n:wq\n" | vim $@
 }
 
-#autoload -Uz _zinit
-#(( ${+_comps} )) && _comps[zinit]=_zinit
-#
-#zinit load momo-lab/zsh-abbrev-alias # 略語を展開する
-#zinit ice wait'!0'; zinit light zsh-users/zsh-autosuggestions
-#zinit ice wait'!0'; zinit light zdharma/fast-syntax-highlighting
-#zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
-#zinit ice wait'!0'; zinit load zsh-users/zsh-completions # 補完
-#zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
-
-autoload -U compinit
-compinit
-setopt share_history
-setopt auto_cd
-export LANG=ja_JP.UTF-8
-HISTSIZE=1000000
-SAVEHIST=1000000
-HISTTIMEFORMAT='[%Y/%m/%d %H:%M:%S] '
-HISTFILE=~/.zhistory
-
-# use emacs move
-#bindkey -e
-
-# use vim commandline
-bindkey '^[' vi-cmd-mode
-
 ######
 #forgit
 ######
