@@ -192,7 +192,6 @@ export DISPLAY=localhost:0.0
 export PATH="$PATH:/root/.local/bin:/root/.anyenv/envs/nodenv/shims:/root/.anyenv/envs/nodenv/bin:/root/.cargo/bin:/root/.cargo/bin:/usr/local/bin:/usr/local/sbin:/Users/kazukinakamura/.ebcli-virtual-env/executables:/root/.cargo/bin:/root/.goenv/shims:/root/.goenv/bin:/root/go/1.14.1/bin:/root/.zinit/polaris/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/kajir/scoop/apps/yarn/current/Yarn/bin:/mnt/c/Users/kajir/scoop/apps/yarn/current/global/node_modules/.bin:/mnt/c/Users/kajir/scoop/shims:/mnt/c/Users/kajir/AppData/Local/Programs/Python/Python38/Scripts/:/mnt/c/Users/kajir/AppData/Local/Programs/Python/Python38/:/mnt/c/Users/kajir/AppData/Local/Microsoft/WindowsApps:/mnt/c/Vim/vim82:/mnt/c/Users/kajir/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/kajir/AppData/Roaming/npm:/root/.fzf/bin"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-eval 
 eval export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
 export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
 export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
