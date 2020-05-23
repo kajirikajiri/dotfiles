@@ -163,76 +163,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     else
         echo 'apt not found'
     fi
-
-#    # zplugをインストールする
-#    if has "curl"; then
-#        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-#    else
-#        echo 'curl, zplug not found'
-#    fi
-#
-#    # golangがなければinstallする
-#    if has "go"; then
-#        echo 'go is present!'
-#    # ない場合はinstallする
-#    elif has "apt"; then
-#        echo 'install go'
-#        sudo apt update
-#        sudo apt install -y golang
-#        go get github.com/x-motemen/ghq
-#    else
-#        echo 'go, apt not found'
-#    fi
-#
-#    # zshがなければinstallする
-#    if has "zsh"; then
-#        echo 'zsh is present!'
-#    # ない場合はinstallする
-#    elif has "apt"; then
-#        echo 'install zsh'
-#        sudo apt update
-#        sudo apt install -y zsh
-#        chsh -s /usr/bin/zsh || true # for skipping in CI
-#    else
-#        echo 'zsh, apt not found'
-#    fi
-#
-#    # vimがなければinstallする
-#    if has "vim"; then
-#        echo 'vim is present!'
-#    # ない場合はinstallする
-#    elif has "apt"; then
-#        echo 'install vim'
-#        sudo apt update
-#        sudo apt install -y vim
-#    else
-#        echo 'vim, apt not found'
-#    fi
-#    
-#    # tmuxをインストールする
-#    if has "tmux"; then
-#        echo 'tmux is present!'
-#    elif has "apt"; then
-#        echo 'install tmux'
-#        sudo apt update
-#        sudo apt install -y tmux
-#        sudo apt search locales
-#        sudo apt install locales-all
-#    else
-#        echo 'tmux apt not found'
-#    fi
-#    
-#    # fzfがなければinstallする
-#    if has "fzf"; then
-#        echo 'fzf is present!'
-#    # ない場合はinstallする
-#    elif has "git"; then
-#        echo 'install fzf'
-#        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-#        ~/.fzf/install
-#    else
-#        echo 'fzf, git not found'
-#    fi
     
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'darwin'
@@ -244,10 +174,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-    
-#    # zplugをインストールする
-#    if has "curl"; then
-#        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-#    fi
 
 fi
+
