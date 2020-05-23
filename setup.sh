@@ -107,10 +107,3 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
 fi
 
-zsh
-vim
-ghq
-fzf
-tmux
-go
-zplug
