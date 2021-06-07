@@ -271,6 +271,8 @@ alias croncreate="crontab ~/.ghq/github.com/kajirikajiri/cron_zsh/cron.edit && c
 
 # alias vscode
 alias c="code"
+alias ci="code-insiders"
+alias ci.="code-insiders ."
 
 # alias trans
 alias te='trans en:ja'
