@@ -74,17 +74,6 @@ function toon {
   echo -n ""
 }
 
-if [ $EMACS ]; then
-  export TERM=xterm-256color
-  PROMPT="%F{green}%~%f %{$fg[red]%}>%{$reset_color%} "
-else
-  PROMPT="%F{green}%~%f
-`rprompt-git-current-branch`
-%{$fg[white]%}$(toon)%{$reset_color%} "
-fi
-PROMPT2="%_%% "
-SPROMPT="%r is correct? [n,y,a,e]: "
-
 function rprompt-git-current-branch {
   local branch_name st branch_status
 
@@ -112,7 +101,17 @@ function rprompt-git-current-branch {
 
 setopt prompt_subst
 
-#RPROMPT='`rprompt-git-current-branch`'
+if [ $EMACS ]; then
+  export TERM=xterm-256color
+  PROMPT="%F{green}%~%f %{$fg[red]%}>%{$reset_color%} "
+else
+  PROMPT="%F{green}%~%f
+%{$fg[white]%}$(toon)%{$reset_color%} "
+fi
+PROMPT2="%_%% "
+SPROMPT="%r is correct? [n,y,a,e]: "
+
+RPROMPT='`rprompt-git-current-branch`'
 #RPROMPT="%1(v|%F{yellow}%1v%f|)%F{red}%T%f"
 
 HISTFILE=~/.zhistory
