@@ -79,6 +79,7 @@ if [ $EMACS ]; then
   PROMPT="%F{green}%~%f %{$fg[red]%}>%{$reset_color%} "
 else
   PROMPT="%F{green}%~%f
+`rprompt-git-current-branch`
 %{$fg[white]%}$(toon)%{$reset_color%} "
 fi
 PROMPT2="%_%% "
@@ -111,7 +112,7 @@ function rprompt-git-current-branch {
 
 setopt prompt_subst
 
-RPROMPT='`rprompt-git-current-branch`'
+#RPROMPT='`rprompt-git-current-branch`'
 #RPROMPT="%1(v|%F{yellow}%1v%f|)%F{red}%T%f"
 
 HISTFILE=~/.zhistory
