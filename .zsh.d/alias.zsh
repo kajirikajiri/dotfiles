@@ -141,9 +141,9 @@ function ghq-fzf() {
 zle -N ghq-fzf
 bindkey "^G" ghq-fzf
 
-# gh-open current dir fzf
+# gh open current dir fzf
 function gh-open-cd-fzf() {
-    BUFFER="gh-open $(pwd)"
+    BUFFER="gh repo view --web"
     zle accept-line
   zle reset-prompt
 }
