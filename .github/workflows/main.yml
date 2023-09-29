@@ -1,29 +1,29 @@
-name: CI
-
-on: [push]
-
-jobs:
-  build-macOS-latest:
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run ./setup.sh
-      run: |
-        ./setup.sh
-  build-ubuntu-latest:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run ./setup.sh
-      run: |
-        ./setup.sh
-  build-ubuntu-16-04:
-    runs-on: ubuntu-16.04
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run ./setup.sh
-      run: |
-        ./setup.sh
+#name: CI
+#
+#on: [push]
+#
+#jobs:
+#  build-macOS-latest:
+#    runs-on: macOS-latest
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Run ./setup.sh
+#      run: |
+#        ./setup.sh
+#  build-ubuntu-latest:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Run ./setup.sh
+#      run: |
+#        ./setup.sh
+#  build-ubuntu-16-04:
+#    runs-on: ubuntu-16.04
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Run ./setup.sh
+#      run: |
+#        ./setup.sh
 #     - name: Run macos setup.sh
 #       run: |
 #         ./macos/setup.sh

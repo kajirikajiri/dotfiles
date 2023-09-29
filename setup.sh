@@ -3,173 +3,71 @@
 DOTPATH=~/.dotfiles
 GITHUB_URL=http://github.com/kajirikajiri/dotfiles.git
 UNAME=$(uname)
+TARBALL="https://github.com/kajirikajiri/dotfiles/archive/main.tar.gz"
 # is_exists returns true if executable $1 exists in $PATH
 is_exists() {
-    type "$1" >/dev/null 2>&1
-    return $?
+	type "$1" >/dev/null 2>&1
+	return $?
 }
 # has is wrapper function
 has() {
-    is_exists "$@"
+	is_exists "$@"
 }
 # die returns exit code error and echo error message
 die() {
-    e_error "$1" 1>&2
-    exit "${2:-1}"
+	e_error "$1" 1>&2
+	exit "${2:-1}"
 }
 
 # git が使えるなら git
 if has "git"; then
-    echo 'git is present!'
-    git clone --recursive "$GITHUB_URL" "$DOTPATH"
+	echo 'git is present!'
+	git clone --recursive "$GITHUB_URL" "$DOTPATH"
 
-# 使えない場合は curl か wget を使用する
-elif has "curl" || has "wget"; then
-    echo 'git isnt present... , but curl or wget are present!!'
-    tarball="https://github.com/kajirikajiri/dotfiles/archive/master.tar.gz"
+# 使えない場合は curl
+elif has "curl"; then
+	echo 'curl is present!!'
+	curl -L "$TARBALL" | tar zxv
 
-    # どっちかでダウンロードして，tar に流す
-    if has "curl"; then
-        curl -L "$tarball"
+	# 解凍したら，DOTPATH に置く
+	mv -f dotfiles-main "$DOTPATH"
 
-    elif has "wget"; then
-        wget -O - "$tarball"
+# 使えない場合は wget
+elif has "wget"; then
+	echo 'wget is present!!'
+	wget -O - "$TARBALL" | tar zxv
 
-    fi | tar zxv
-
-    # 解凍したら，DOTPATH に置く
-    mv -f dotfiles-master "$DOTPATH"
-
+	# 解凍したら，DOTPATH に置く
+	mv -f dotfiles-main "$DOTPATH"
 else
-    die "curl or wget required"
+	die "git or curl or wget required"
 fi
 
 cd "$DOTPATH"
 if [ $? -ne 0 ]; then
-    die "not found: $DOTPATH"
+	die "not found: $DOTPATH"
+fi
+
+# バックアップ用のディレクトリを作成する
+if [ ! -d "$HOME/.dotbackup" ];then
+	command echo "$HOME/.dotbackup not found. Auto Make it"
+	command mkdir "$HOME/.dotbackup"
 fi
 
 # 移動できたらリンクを実行する
 for f in .??*
 do
-    [ "$f" = ".git" ] && continue
+	[ "`basename $f`" = ".git" ] && continue
+	if [[ -L "$HOME/`basename $f`" ]];then
+		rm -f "$HOME/`basename $f`"
+	fi
+	if [[ -e "$HOME/`basename $f`" ]];then
+		mv "$HOME/`basename $f`" "$HOME/.dotbackup"
+		echo "mv $HOME/`basename $f` $HOME/.dotbackup"
+	fi
 
-    ln -snfv "$DOTPATH/$f" "$HOME/$f"
+	ln -snfv "$DOTPATH/$f" "$HOME/$f"
 done
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo 'linux-gnu'
-    
-    # sudoがなければinstallする
-    if has "sudo"; then
-        echo 'sudo is present!'
-    elif has "apt"; then
-        echo 'install sudo'
-        apt update
-        apt install -y sudo
-    fi
-    
-    # zshがなければinstallする
-    if has "zsh"; then
-        echo 'zsh is present!'
-    # ない場合はinstallする
-    elif has "apt"; then
-        echo 'install zsh'
-        sudo apt update
-        sudo apt install -y zsh
-        chsh -s /usr/bin/zsh || true # for skipping in CI
-    else
-        echo 'zsh, apt not found'
-    fi
+echo "linked dotfiles complete!"
 
-    # vimがなければinstallする
-    if has "vim"; then
-        echo 'vim is present!'
-    # ない場合はinstallする
-    elif has "apt"; then
-        echo 'install vim'
-        sudo apt update
-        sudo apt install -y vim
-    else
-        echo 'vim, apt not found'
-    fi
-    
-    # vim-plugをインストールする
-    if has "curl"; then
-        echo 'install vim-plug'
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    else
-        echo 'curl not found'
-    fi
-    
-    # zplugをインストールする
-    if has "curl"; then
-        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-    else
-        echo 'curl not found'
-    fi
-    
-    # tmuxをインストールする
-    if has "tmux"; then
-        echo 'tmux is present!'
-    elif has "apt"; then
-        echo 'install tmux'
-        sudo apt update
-        sudo apt install -y tmux
-        sudo apt search locales
-        sudo apt install locales-all
-    else
-        echo 'tmux apt not found'
-    fi
-
-        
-    # golangがなければinstallする
-    if has "go"; then
-        echo 'go is present!'
-    # ない場合はinstallする
-    elif has "apt"; then
-        echo 'install go'
-        sudo apt update
-        sudo apt install -y golang
-        go get github.com/x-motemen/ghq
-    else
-        echo 'go, apt not found'
-    fi
-    
-    # fzfがなければinstallする
-    if has "fzf"; then
-        echo 'fzf is present!'
-    # ない場合はinstallする
-    elif has "git"; then
-        echo 'install fzf'
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-        ~/.fzf/install
-    else
-        echo 'fzf, git not found'
-    fi
-    
-    # 言語ファイルをダウンロード
-    if has "apt"; then
-        sudo apt install locales-all
-    fi
-    
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo 'darwin'
-    brew install zsh vim ghq fzf tmux
-    
-    # vim-plugをインストールする
-    if has "curl"; then
-        echo 'install vim-plug'
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    fi
-    
-    # zplugをインストールする
-    if has "curl"; then
-        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-    else
-        echo 'curl not found'
-    fi
-
-fi
