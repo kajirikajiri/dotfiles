@@ -58,10 +58,10 @@ fi
 for f in .??*
 do
 	[ "`basename $f`" = ".git" ] && continue
-	if [[ -L "$HOME/`basename $f`" ]];then
+	if [ -L "$HOME/`basename $f`" ];then
 		rm -f "$HOME/`basename $f`"
 	fi
-	if [[ -e "$HOME/`basename $f`" ]];then
+	if [ -e "$HOME/`basename $f`" ];then
 		mv "$HOME/`basename $f`" "$HOME/.dotbackup"
 		echo "mv $HOME/`basename $f` $HOME/.dotbackup"
 	fi
