@@ -2,7 +2,6 @@
 
 DOTPATH=~/.dotfiles
 GITHUB_URL=http://github.com/kajirikajiri/dotfiles.git
-UNAME=$(uname)
 TARBALL="https://github.com/kajirikajiri/dotfiles/archive/main.tar.gz"
 # is_exists returns true if executable $1 exists in $PATH
 is_exists() {
@@ -50,20 +49,18 @@ fi
 
 # バックアップ用のディレクトリを作成する
 if [ ! -d "$HOME/.dotbackup" ];then
-	command echo "$HOME/.dotbackup not found. Auto Make it"
-	command mkdir "$HOME/.dotbackup"
+	mkdir -v "$HOME/.dotbackup"
 fi
 
 # 移動できたらリンクを実行する
 for f in .??*
 do
 	[ "`basename $f`" = ".git" ] && continue
-	if [ -L "$HOME/`basename $f`" ];then
-		rm -f "$HOME/`basename $f`"
+	if [[ -L "$HOME/`basename $f`" ]];then
+		rm -fv "$HOME/`basename $f`"
 	fi
-	if [ -e "$HOME/`basename $f`" ];then
-		mv "$HOME/`basename $f`" "$HOME/.dotbackup"
-		echo "mv $HOME/`basename $f` $HOME/.dotbackup"
+	if [[ -e "$HOME/`basename $f`" ]];then
+		mv -v "$HOME/`basename $f`" "$HOME/.dotbackup"
 	fi
 
 	ln -snfv "$DOTPATH/$f" "$HOME/$f"
