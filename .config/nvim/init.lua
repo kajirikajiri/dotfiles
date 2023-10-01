@@ -84,9 +84,6 @@ require("lazy").setup({
 	{
 		"kelly-lin/telescope-ag",
 		dependencies = { "nvim-telescope/telescope.nvim" },
-		--config = function()
-		--	require("telescope-ag").setup()
-		--end
 	},
 	{
 		'lewis6991/gitsigns.nvim',
@@ -241,7 +238,7 @@ require("lazy").setup({
 					auto_trigger = true,
 					keymap = {
 						accept = "¬", -- alt + l
-						accept_word = false,
+						accept_word = "Ò", -- alt + L
 						accept_line = false,
 						next = "‘", -- alt + ]
 						prev = "“", -- alt + [
@@ -254,7 +251,6 @@ require("lazy").setup({
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
-		opts = {},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -325,12 +321,7 @@ require("lazy").setup({
 				'nvim-tree/nvim-web-devicons',
 			}
 	},
-	{
-		"Pocco81/auto-save.nvim",
-		config = function()
-			require('auto-save').setup()
-		end
-	},
+	{ "Pocco81/auto-save.nvim" },
 	{
 		'smoka7/hop.nvim',
 		version = "*",
