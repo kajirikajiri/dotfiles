@@ -191,26 +191,34 @@ require("lazy").setup({
 		'sheerun/vim-polyglot',
 	},
 	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
+		'echasnovski/mini.clue',
+		version = '*',
 		config = function()
-			local wk = require("which-key")
-			wk.register({
-					['<Space>'] = {
-						g = {
-							name = 'git'
-						},
-						h = {
-							name = 'hunk'
-						},
-					}
-				})
+			local miniclue = require('mini.clue')
+			miniclue.setup {
+				window = {
+					delay = 500,
+					config = {
+						width = "auto"
+					},
+				},
+				triggers = {
+					{ mode = 'n', keys = '<Space>' },
+				},
+				clues = {
+					{ mode = 'n', keys = '<Space>g', desc = '+git' },
+					{ mode = 'n', keys = '<Space>h', desc = '+hunk' },
+					-- Enhance this by adding descriptions for <Leader> mapping groups
+					miniclue.gen_clues.builtin_completion(),
+					miniclue.gen_clues.g(),
+					miniclue.gen_clues.marks(),
+					miniclue.gen_clues.registers(),
+					miniclue.gen_clues.windows(),
+					miniclue.gen_clues.z(),
+				},
+			}
 		end
-		},
+	},
 	{
 		"sindrets/diffview.nvim",
 		keys = {
