@@ -259,6 +259,9 @@ require("lazy").setup({
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
+		config = function()
+			require("mason").setup()
+		end
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
