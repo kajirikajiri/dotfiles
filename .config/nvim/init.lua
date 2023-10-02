@@ -401,7 +401,43 @@ require("lazy").setup({
 				git_change = utils.get_highlight("diffChanged").fg,
 			}
 			local conditions = require("heirline.conditions")
-			local Git = {
+			local GitDir = {
+				{
+					init = function(self)
+						local handle = io.popen("basename -s .git $(dirname $(git config --get remote.origin.url 2>/dev/null) 2>/dev/null) 2>/dev/null")
+						local owner = handle:read("*a"):gsub("\n", "") or ""
+						handle:close()
+
+						local handle = io.popen("basename -s .git $(git config --get remote.origin.url) 2>/dev/null")
+						local repository = handle:read("*a"):gsub("\n", "") or ""
+						handle:close()
+
+						local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+						local branch = handle:read("*a"):gsub("\n", "") or ""
+						handle:close()
+						
+						local git = ""
+						if owner ~= "" and repository ~= "" then
+							git = owner .. "/" .. repository
+							if branch ~= "" then
+								-- gitsigns_status_dictがnilの場合またはgit_signs_status_dict.headがcwdのbranchと異なる場合は、cwdのgitのbranchを追加
+								if vim.b.gitsigns_status_dict == nil or vim.b.gitsigns_status_dict.head ~= branch then
+									git = git .. "  " .. branch
+								end
+							end
+						end
+						git = git .. " "
+						self.git = git
+					end,
+
+					hl = { fg = colors.gray },
+
+					provider = function(self)
+						return self.git
+					end,
+				}
+			}
+			local GitFile = {
 				condition = conditions.is_git_repo,
 
 				init = function(self)
@@ -409,7 +445,7 @@ require("lazy").setup({
 					self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 				end,
 
-				hl = { fg = colors.orange },
+				hl = { fg = colors.gray },
 
 
 				{   -- git branch name
@@ -454,7 +490,7 @@ require("lazy").setup({
 				},
 			}
 			require("heirline").setup({
-					statusline = {Git},
+					statusline = {GitDir, GitFile},
 				})
 			vim.opt.laststatus = 3
 		end
