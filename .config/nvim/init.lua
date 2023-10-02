@@ -208,6 +208,7 @@ require("lazy").setup({
 				clues = {
 					{ mode = 'n', keys = '<Space>g', desc = '+git' },
 					{ mode = 'n', keys = '<Space>h', desc = '+hunk' },
+					{ mode = 'n', keys = '<Space>i', desc = '+indent' },
 					-- Enhance this by adding descriptions for <Leader> mapping groups
 					miniclue.gen_clues.builtin_completion(),
 					miniclue.gen_clues.g(),
@@ -374,8 +375,9 @@ require("lazy").setup({
 				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 			end)
 
-			require("ibl").setup { indent = { highlight = highlight } }
-		end
+			require("ibl").setup { indent = { highlight = highlight }, enabled = false }
+			vim.keymap.set("n", "<Space>it", ':IBLToggle<CR>', {desc = 'IBL: インデントガイドラインON, OFF'})
+		end,
 	},
 	{
 		"rebelot/heirline.nvim",
