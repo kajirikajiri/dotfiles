@@ -41,11 +41,15 @@ require("lazy").setup({
 		}
 	},
 	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.3',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		'nvim-telescope/telescope.nvim', branch = '0.1.x',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			"nvim-telescope/telescope-live-grep-args.nvim",
+		},
 		keys = {
 			{'<Space>p', ':Telescope find_files<CR>', desc = 'Telescope: ファイル名検索, file name search'},
-			{'<Space>f', ':Telescope grep_string search=<CR>', desc = 'Telescope: ファイル内検索, full text search'},
+			{'<Space>f', ':Telescope live_grep search=<CR>', desc = 'Telescope: ファイル内検索, full text search'},
+			{'<Space>F', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = 'Telescope: ファイル内検索+引数, full text search'},
 			{'<Space>P', ':Telescope keymaps<CR>', desc = 'Telescope: コマンドパレット, command pallet'},
 			{'<Space>b', ':Telescope buffers<CR>', desc = 'Telescope: 開いてるファイル, buffers'},
 			{'<Space>tgs', ':Telescope git_status<CR>', desc = 'Telescope: 編集済み, git status'},
@@ -75,6 +79,7 @@ require("lazy").setup({
 				}
 			}
 			require('telescope').load_extension('fzf')
+			require("telescope").load_extension("live_grep_args")
 		end
 	},
 	{
