@@ -231,7 +231,8 @@ require("lazy").setup({
 			{'<Space>gh', ':DiffviewFileHistory -n=20000 %<CR>', desc = 'DiffviewFileHistory: Git File History'},
 			{'<Space>gs', ':DiffviewOpen<CR>', desc = 'DiffviewOpen: VSCode source control'},
 			{'<Space>gc', ':DiffviewFileHistory -n=20000<CR>', desc = 'DiffviewFileHistory: VSCode commits'},
-		}
+		},
+		lazy = false,
 	},
 	{
 		"ruifm/gitlinker.nvim",
@@ -305,12 +306,20 @@ require("lazy").setup({
 			end})
 		end
 	},
+	--{
+	--	"catppuccin/nvim", name = "catppuccin",
+	--	lazy = false,
+	--	priority = 1000,
+	--	config = function()
+	--		vim.cmd.colorscheme "catppuccin-mocha"
+	--	end
+	--},
 	{
-		"catppuccin/nvim", name = "catppuccin",
+		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme "catppuccin-mocha"
+			vim.cmd.colorscheme "tokyonight-day"
 		end
 	},
 	{
