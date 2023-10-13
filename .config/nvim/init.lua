@@ -65,6 +65,7 @@ require("lazy").setup({
 					buffers = {
 						show_all_buffers = true,
 						sort_lastused = true,
+						sort_mru = true,
 						theme = "dropdown",
 						previewer = false,
 						mappings = {
@@ -365,6 +366,7 @@ require("lazy").setup({
 		main = "ibl",
 		config = function()
 			vim.opt.listchars:append "eol:↴"
+			vim.opt.list = true
 
 			local highlight = {
 				"RainbowRed",
