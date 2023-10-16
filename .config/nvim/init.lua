@@ -515,7 +515,18 @@ require("lazy").setup({
 	},
 	{
 		"https://tpope.io/vim/fugitive.git",
-	}
+	},
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		config = function()
+			require("toggleterm").setup {
+				size = 20,
+				open_mapping = [[<c-j>]],
+				shading_factor = 1,
+			}
+		end
+	},
 })
 
 
