@@ -536,3 +536,27 @@ vim.opt.clipboard = 'unnamedplus' -- クリップボードをOSと共有
 vim.opt.cursorline = true -- カーソル行をハイライト
 vim.wo.number = true -- 行番号を表示
 
+
+-- 関数の定義
+function _G.search_in_git_diff(commit1, commit2, search_query)
+	local diff_output = vim.fn.systemlist('git diff --color=never -U0 ' .. commit1 .. ' ' .. commit2)
+	local results = {}
+	local current_file = ""
+	local current_line = 0
+	for _, line in ipairs(diff_output) do
+		if line:match('^%+%+%+ b/.+') then
+			current_file = line:match('^%+%+%+ b/(.+)')
+		elseif line:match('^@@ %-%d+') then
+			current_line = line:match('^@@ %-(%d+)')
+		elseif line:match('^%+') then
+			local match_line = line:sub(2)
+			if match_line:find(search_query) then
+				table.insert(results, {filename = current_file, lnum = current_line, text = match_line})
+			end
+			current_line = current_line + 1
+		end
+	end
+	vim.fn.setqflist(results)
+	vim.cmd('copen')
+end
+
