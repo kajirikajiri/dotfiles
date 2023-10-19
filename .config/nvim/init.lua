@@ -546,8 +546,8 @@ function _G.search_in_git_diff(commit1, commit2, search_query)
 	for _, line in ipairs(diff_output) do
 		if line:match('^%+%+%+ b/.+') then
 			current_file = line:match('^%+%+%+ b/(.+)')
-		elseif line:match('^@@ %-%d+') then
-			current_line = line:match('^@@ %-(%d+)')
+		elseif line:match('^@@ %+%d+') then
+			current_line = line:match('^@@ %+(%d+)')
 		elseif line:match('^%+') then
 			local match_line = line:sub(2)
 			if match_line:find(search_query) then
