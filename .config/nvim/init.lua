@@ -50,6 +50,7 @@ require("lazy").setup({
 			{'<Space>p', ':Telescope find_files<CR>', desc = 'Telescope: ファイル名検索, file name search'},
 			{'<Space>f', ':Telescope live_grep search=<CR>', desc = 'Telescope: ファイル内検索, full text search'},
 			{'<Space>F', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = 'Telescope: ファイル内検索+引数, full text search'},
+			{'<Space>a', ":lua require('telescope').extensions.live_grep_args.live_grep_args({vimgrep_arguments = {'ag', '--vimgrep', '--column'}})<CR>", desc = 'Telescope: ファイル内検索+引数+ag, full text search'},
 			{'<Space>P', ':Telescope keymaps<CR>', desc = 'Telescope: コマンドパレット, command pallet'},
 			{'<Space>b', ':Telescope buffers<CR>', desc = 'Telescope: 開いてるファイル, buffers'},
 			{'<Space>tgs', ':Telescope git_status<CR>', desc = 'Telescope: 編集済み, git status'},
