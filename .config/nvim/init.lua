@@ -89,10 +89,6 @@ require("lazy").setup({
 		build = 'make',
 	},
 	{
-		"kelly-lin/telescope-ag",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-	},
-	{
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup {
