@@ -524,6 +524,12 @@ require("lazy").setup({
 			}
 		end
 	},
+	{
+		'kajirikajiri/git-modified-search.nvim',
+		config = function()
+			require('git-modified-search').setup()
+		end
+	}
 })
 
 
