@@ -237,11 +237,20 @@ require("lazy").setup({
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require("gitlinker").setup {
-				mappings = nil
+				opts = {
+					action_callback = function(url)
+						if enabled_osc52() then
+							require("osc52").copy(url)
+						else
+							require("gitlinker.actions").copy_to_clipboard(url)
+						end
+					end,
+					mappings = nil,
+				},
 			}
 			vim.keymap.set('n', '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("n")<CR>', {desc = 'GitLinker: コピーpermalink'})
 			vim.keymap.set('v', '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("v")<CR>', {desc = 'GitLinker: コピーpermalink'})
-		end
+		end,
 	},
 	{
 		"zbirenbaum/copilot.lua",
@@ -298,40 +307,21 @@ require("lazy").setup({
 	},
 	{
 		'ojroques/nvim-osc52',
-    enabled = function()
-      local is_remote = vim.env.SSH_CLIENT
-      return is_remote and (vim.env.DISPLAY == nil or vim.env.DISPLAY == "")
-    end,
-		config = function()
-			local function copy(lines, _)
-				require("osc52").copy(table.concat(lines, "\n"))
+    enabled = enabled_osc52,
+		init = function()
+			local au_copy = function()
+				if vim.v.event.operator == "y" and vim.v.event.regname == "+" then
+					require("osc52").copy_register("+")
+				end
+				if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+					require("osc52").copy_register("")
+				end
 			end
-			local function paste()
-				local contents = vim.fn.getreg("") --[[@as string]]
-				return { vim.fn.split(contents, "\n"), vim.fn.getregtype("") }
-			end
-			vim.g.clipboard = {
-				name = "osc52",
-				copy = { ["+"] = copy, ["*"] = copy },
-				paste = { ["+"] = paste, ["*"] = paste },
-			}
-
-			local registers_to_copy = {
-				"", -- unnamed, e.g. yy
-				"+",
-			}
-			vim.api.nvim_create_autocmd("TextYankPost", {
-					callback = function()
-						if
-							vim.v.event.operator == "y"
-							and vim.list_contains(registers_to_copy, vim.v.event.regname)
-							then
-							require("osc52").copy_register("+")
-						end
-					end,
-					desc = "copy + yanks into osc52",
-				})
+			vim.api.nvim_create_autocmd("TextYankPost", { callback = au_copy })
 		end,
+		opts = {
+			silent = true,
+		}
 	},
 	--{
 	--	"catppuccin/nvim", name = "catppuccin",
@@ -592,3 +582,7 @@ function _G.search_in_git_diff(commit1, commit2, search_query)
 	vim.cmd('copen')
 end
 
+function enabled_osc52()
+	local is_remote = vim.env.SSH_CLIENT
+	return is_remote and (vim.env.DISPLAY == nil or vim.env.DISPLAY == "")
+end
