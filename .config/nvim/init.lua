@@ -298,6 +298,10 @@ require("lazy").setup({
 	},
 	{
 		'ojroques/nvim-osc52',
+    enabled = function()
+      local is_remote = vim.env.SSH_CLIENT
+      return is_remote and (vim.env.DISPLAY == nil or vim.env.DISPLAY == "")
+    end,
 		config = function()
 			vim.api.nvim_create_autocmd('TextYankPost', {callback = function()
 				require('osc52').copy_register('+')
