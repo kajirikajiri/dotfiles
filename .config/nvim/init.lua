@@ -303,10 +303,35 @@ require("lazy").setup({
       return is_remote and (vim.env.DISPLAY == nil or vim.env.DISPLAY == "")
     end,
 		config = function()
-			vim.api.nvim_create_autocmd('TextYankPost', {callback = function()
-				require('osc52').copy_register('+')
-			end})
-		end
+			local function copy(lines, _)
+				require("osc52").copy(table.concat(lines, "\n"))
+			end
+			local function paste()
+				local contents = vim.fn.getreg("") --[[@as string]]
+				return { vim.fn.split(contents, "\n"), vim.fn.getregtype("") }
+			end
+			vim.g.clipboard = {
+				name = "osc52",
+				copy = { ["+"] = copy, ["*"] = copy },
+				paste = { ["+"] = paste, ["*"] = paste },
+			}
+
+			local registers_to_copy = {
+				"", -- unnamed, e.g. yy
+				"+",
+			}
+			vim.api.nvim_create_autocmd("TextYankPost", {
+					callback = function()
+						if
+							vim.v.event.operator == "y"
+							and vim.list_contains(registers_to_copy, vim.v.event.regname)
+							then
+							require("osc52").copy_register("+")
+						end
+					end,
+					desc = "copy + yanks into osc52",
+				})
+		end,
 	},
 	--{
 	--	"catppuccin/nvim", name = "catppuccin",
