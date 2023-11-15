@@ -228,7 +228,8 @@ require("lazy").setup({
 		keys = {
 			{'<Space>gh', ':DiffviewFileHistory -n=20000 %<CR>', desc = 'DiffviewFileHistory: Git File History'},
 			{'<Space>gs', ':DiffviewOpen<CR>', desc = 'DiffviewOpen: VSCode source control'},
-			{'<Space>gc', ':DiffviewFileHistory -n=20000<CR>', desc = 'DiffviewFileHistory: VSCode commits'},
+			{'<Space>gc', ':DiffviewFileHistory<CR>', desc = 'DiffviewFileHistory: VSCode commits'},
+			{'<Space>gC', ':DiffviewFileHistory -n=20000<CR>', desc = 'DiffviewFileHistory: VSCode commits more'},
 		},
 		lazy = false,
 	},
