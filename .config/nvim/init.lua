@@ -45,7 +45,12 @@ require("lazy").setup({
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			"nvim-telescope/telescope-live-grep-args.nvim",
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = 'make',
+			},
 		},
+		lazy = false,
 		keys = {
 			{'<Space>p', ':Telescope find_files<CR>', desc = 'Telescope: ファイル名検索, file name search'},
 			{'<Space>F', ':Telescope live_grep search=<CR>', desc = 'Telescope: ファイル内検索, full text search'},
@@ -83,10 +88,6 @@ require("lazy").setup({
 			require('telescope').load_extension('fzf')
 			require("telescope").load_extension("live_grep_args")
 		end
-	},
-	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'make',
 	},
 	{
 		'lewis6991/gitsigns.nvim',
