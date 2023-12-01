@@ -348,7 +348,14 @@ require("lazy").setup({
 	{
 		"nvimdev/lspsaga.nvim",
 	    config = function()
-				require('lspsaga').setup()
+				require('lspsaga').setup({
+						ui = {
+							code_action = "💡",
+						},
+						lightbulb = {
+							enable = false,
+						}
+					})
 				local function show_documentation()
 					local ft = vim.opt.filetype._value
 					if ft == 'vim' or ft == 'help' then
