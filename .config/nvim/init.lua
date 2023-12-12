@@ -374,10 +374,15 @@ require("lazy").setup({
 			}
 	},
 	{
-		"Pocco81/auto-save.nvim",
+		"okuuva/auto-save.nvim",
 		opts = {
-			trigger_events = { "FocusLost" }, -- BufLeaveもいるかも??
-		}
+			enabled = true,
+			trigger_events = { -- See :h events
+				immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
+				defer_save = {}, -- { "InsertLeave", "TextChanged" } 元々は入力モードを抜けると保存されていたが、それだと追加の変更を行うつもりの時に困る。特に、GatsbyとかのHotReloadが有効になっていると、勝手に保存されて構文エラーで落ちる。非常に面倒であったため、無効にした。
+				cancel_defered_save = { "InsertEnter" }, -- vim events that cancel a pending deferred save
+			},
+		},
 	},
 	{
 		'smoka7/hop.nvim',
