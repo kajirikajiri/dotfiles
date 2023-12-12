@@ -373,7 +373,12 @@ require("lazy").setup({
 				'nvim-tree/nvim-web-devicons',
 			}
 	},
-	{ "Pocco81/auto-save.nvim" },
+	{
+		"Pocco81/auto-save.nvim",
+		opts = {
+			trigger_events = { "FocusLost" }, -- BufLeaveもいるかも??
+		}
+	},
 	{
 		'smoka7/hop.nvim',
 		version = "*",
