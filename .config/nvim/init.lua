@@ -60,8 +60,8 @@ require("lazy").setup({
 			{'<Space>b', ':Telescope buffers<CR>', desc = 'Telescope: 開いてるファイル, buffers'},
 			{'<Space>tgs', ':Telescope git_status<CR>', desc = 'Telescope: 編集済み, git status'},
 			{'gr', ':Telescope lsp_references<CR>', desc = 'Telescope: 使用箇所'},
-			{'gi', ':Telescope lsp_implementations<CR>', desc = 'Telescope: 実装ジャンプ'},
-			{'gd', ':Telescope lsp_definitions<CR>', desc = 'Telescope: 定義ジャンプ'},
+			{'gi', ':Telescope lsp_implementations<CR>', desc = 'Telescope: 実装ジャンプ'}, -- 例えばReactだと、コンポーネントの実装箇所に飛べる
+			{'gd', ':Telescope lsp_definitions<CR>', desc = 'Telescope: 定義ジャンプ'}, -- 例えばReactだと、コンポーネントの定義箇所(FunctionComponent)に飛べる
 			{'<Space>gt', ':Telescope lsp_type_definitions<CR>', desc = 'Telescope: 型定義ジャンプ'},
 			{'ge', ':Telescope diagnostics<CR>', desc = 'Telescope: エラー一覧'},
 		},
@@ -162,10 +162,12 @@ require("lazy").setup({
 					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 				}),
 				sources = cmp.config.sources({
-					{ name = 'nvim_lsp' },
-					{ name = 'luasnip' },
+					{ name = "copilot", group_index = 2 },
+					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "path", group_index = 2 },
+					{ name = "luasnip", group_index = 2 },
 				}, {
-					{ name = 'buffer' },
+					{ name = 'buffer', keyword_length = 2 },
 				})
 			}
 			cmp.setup.filetype('gitcommit', {
@@ -192,8 +194,10 @@ require("lazy").setup({
 		end,
 	},
 	{
-		'sheerun/vim-polyglot',
+	"zbirenbaum/copilot-cmp",
+		config = true,
 	},
+	{ 'sheerun/vim-polyglot' },
 	{
 		'echasnovski/mini.clue',
 		version = '*',
@@ -237,28 +241,36 @@ require("lazy").setup({
 	{
 		"ruifm/gitlinker.nvim",
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		config = function()
-			require("gitlinker").setup {
-				opts = {
-					action_callback = function(url)
-						if enabled_osc52() then
-							require("osc52").copy(url)
-						else
-							require("gitlinker.actions").copy_to_clipboard(url)
-						end
-					end,
-					mappings = nil,
-				},
+		opts = {
+			opts = {
+				action_callback = function(url)
+					if enabled_osc52() then
+						require("osc52").copy(url)
+					else
+						require("gitlinker.actions").copy_to_clipboard(url)
+					end
+				end,
+				mappings = nil,
 			}
-			vim.keymap.set('n', '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("n")<CR>', {desc = 'GitLinker: コピーpermalink'})
-			vim.keymap.set('v', '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("v")<CR>', {desc = 'GitLinker: コピーpermalink'})
-		end,
+		},
+		keys = {
+			{ '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("n")<CR>', desc = 'GitLinker: コピーpermalink', mode = 'n'},
+			{ '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("v")<CR>', desc = 'GitLinker: コピーpermalink', mode = 'v'},
+		},
 	},
 	{
 		"zbirenbaum/copilot.lua",
 		config = function()
+			local ostype = vim.loop.os_uname().sysname
+			local node_absolute_path = 'node'
+			if ostype == 'Linux' then
+				node_absolute_path = '/home/kajiri/.nvm/versions/node/v20.10.0/bin/node'
+			else
+				node_absolute_path = 'node'
+			end
 			require("copilot").setup {
 				suggestion = {
+					enabled = false, -- copilot-cmpを使っているので無効化
 					auto_trigger = true,
 					keymap = {
 						accept = "¬", -- alt + l
@@ -268,16 +280,18 @@ require("lazy").setup({
 						prev = "“", -- alt + [
 						dismiss = "<C-]>",
 					},
-				}
+				},
+				panel = {
+					enabled = false, -- copilot-cmpを使っているので無効化
+				},
+				copilot_node_command = node_absolute_path
 			}
 		end
 	},
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
-		config = function()
-			require("mason").setup()
-		end
+		config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -325,14 +339,6 @@ require("lazy").setup({
 			silent = true,
 		}
 	},
-	--{
-	--	"catppuccin/nvim", name = "catppuccin",
-	--	lazy = false,
-	--	priority = 1000,
-	--	config = function()
-	--		vim.cmd.colorscheme "catppuccin-mocha"
-	--	end
-	--},
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -564,9 +570,7 @@ require("lazy").setup({
 	},
 	{
 		'kajirikajiri/git-modified-search.nvim',
-		config = function()
-			require('git-modified-search').setup()
-		end
+		config = true
 	}
 })
 
