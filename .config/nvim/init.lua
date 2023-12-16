@@ -264,7 +264,9 @@ require("lazy").setup({
 			local ostype = vim.loop.os_uname().sysname
 			local node_absolute_path = 'node'
 			if ostype == 'Linux' then
-				node_absolute_path = '/home/kajiri/.nvm/versions/node/v20.10.0/bin/node'
+				node_absolute_path = '/home/kajiri/.nvm/versions/node/v20.10.0/bin/node' --linux
+			elseif ostype == 'Darwin' then
+				node_absolute_path = '/Users/kajiri/.nvm/versions/node/v20.10.0/bin/node' --mac
 			else
 				node_absolute_path = 'node'
 			end
