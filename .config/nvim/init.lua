@@ -162,7 +162,7 @@ require("lazy").setup({
 					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 				}),
 				sources = cmp.config.sources({
-					{ name = "copilot", group_index = 2 },
+					-- { name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "path", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
@@ -193,10 +193,10 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{
-	"zbirenbaum/copilot-cmp",
-		config = true,
-	},
+	--{
+	--	"zbirenbaum/copilot-cmp",
+	--	config = true,
+	--},
 	{ 'sheerun/vim-polyglot' },
 	{
 		'echasnovski/mini.clue',
@@ -258,38 +258,38 @@ require("lazy").setup({
 			{ '<Space>gl', '<cmd>lua require"gitlinker".get_buf_range_url("v")<CR>', desc = 'GitLinker: コピーpermalink', mode = 'v'},
 		},
 	},
-	{
-		"zbirenbaum/copilot.lua",
-		config = function()
-			local ostype = vim.loop.os_uname().sysname
-			local node_absolute_path = 'node'
-			if ostype == 'Linux' then
-				node_absolute_path = '/home/kajiri/.nvm/versions/node/v20.10.0/bin/node' --linux
-			elseif ostype == 'Darwin' then
-				node_absolute_path = '/Users/kajiri/.nvm/versions/node/v20.10.0/bin/node' --mac
-			else
-				node_absolute_path = 'node'
-			end
-			require("copilot").setup {
-				suggestion = {
-					enabled = false, -- copilot-cmpを使っているので無効化
-					auto_trigger = true,
-					keymap = {
-						accept = "¬", -- alt + l
-						accept_word = "Ò", -- alt + L
-						accept_line = false,
-						next = "‘", -- alt + ]
-						prev = "“", -- alt + [
-						dismiss = "<C-]>",
-					},
-				},
-				panel = {
-					enabled = false, -- copilot-cmpを使っているので無効化
-				},
-				copilot_node_command = node_absolute_path
-			}
-		end
-	},
+	--{
+	--	"zbirenbaum/copilot.lua",
+	--	config = function()
+	--		local ostype = vim.loop.os_uname().sysname
+	--		local node_absolute_path = 'node'
+	--		if ostype == 'Linux' then
+	--			node_absolute_path = '/home/kajiri/.nvm/versions/node/v20.10.0/bin/node' --linux
+	--		elseif ostype == 'Darwin' then
+	--			node_absolute_path = '/Users/kajiri/.nvm/versions/node/v20.10.0/bin/node' --mac
+	--		else
+	--			node_absolute_path = 'node'
+	--		end
+	--		require("copilot").setup {
+	--			suggestion = {
+	--				enabled = false, -- copilot-cmpを使っているので無効化
+	--				auto_trigger = true,
+	--				keymap = {
+	--					accept = "¬", -- alt + l
+	--					accept_word = "Ò", -- alt + L
+	--					accept_line = false,
+	--					next = "‘", -- alt + ]
+	--					prev = "“", -- alt + [
+	--					dismiss = "<C-]>",
+	--				},
+	--			},
+	--			panel = {
+	--				enabled = false, -- copilot-cmpを使っているので無効化
+	--			},
+	--			copilot_node_command = node_absolute_path
+	--		}
+	--	end
+	--},
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
@@ -573,7 +573,11 @@ require("lazy").setup({
 	{
 		'kajirikajiri/git-modified-search.nvim',
 		config = true
-	}
+	},
+	{
+		'wakatime/vim-wakatime',
+		event = "VeryLazy"
+	},
 })
 
 
