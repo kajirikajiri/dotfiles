@@ -1,3 +1,16 @@
+-- 便利関数
+function read_file(path)
+  local file = io.open(path, "r") -- ファイルを読み込みモードで開く
+  if not file then return nil end -- ファイルが開けなかった場合はnilを返す
+  local content = file:read("*a") -- 全ての内容を読み込む
+  file:close() -- ファイルを閉じる
+  return content
+end
+
+function endswith(str, ending)
+    return ending == "" or str:sub(-#ending) == ending
+end
+
 -- folke/lazy.nvimの設定
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -93,6 +106,16 @@ require("lazy").setup({
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup {
+				signs      = {
+					add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+					change       = { hl = 'GitSignsChange', text = '+', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+					delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
+					topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
+					changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+					untracked    = { hl = 'GitSignsAdd', text = '┆', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+				},
+				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+				numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
 				on_attach = function(bufnr)
 					local gs = package.loaded.gitsigns
 
@@ -341,12 +364,20 @@ require("lazy").setup({
 			silent = true,
 		}
 	},
+	--{
+	--	"folke/tokyonight.nvim",
+	--	lazy = false,
+	--	priority = 1000,
+	--	config = function()
+	--		vim.cmd.colorscheme "tokyonight"
+	--	end
+	--},
 	{
-		"folke/tokyonight.nvim",
+		"rebelot/kanagawa.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme "tokyonight"
+			vim.cmd.colorscheme "kanagawa-wave"
 		end
 	},
 	{
@@ -578,6 +609,34 @@ require("lazy").setup({
 		'wakatime/vim-wakatime',
 		event = "VeryLazy"
 	},
+	{
+		"nvimtools/none-ls.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+					sources = {
+						null_ls.builtins.formatting.stylua,
+						null_ls.builtins.diagnostics.eslint,
+						null_ls.builtins.completion.spell,
+					},
+				})
+		end,
+
+		-- 
+		enabled = function()
+			local dirnames = read_file(os.getenv("HOME") .. "/ghq/github.com/kajirikajiri/env/nvim/folke/lazy.nvim/nvimtools/none-ls.nvim/enabled.env") or ""
+			for dirname in string.gmatch(dirnames, "[^\r\n]+") do
+				if dirname == "" then -- 空文字は無視
+					return false
+				end
+				if endswith(vim.fn.getcwd(), dirname) then
+					return true
+				end
+			end
+			
+			return false
+		end
+	},
 })
 
 
@@ -585,6 +644,7 @@ require("lazy").setup({
 vim.opt.termguicolors = true -- set termguicolors to enable highlight groups
 vim.opt.clipboard = 'unnamedplus' -- クリップボードをOSと共有
 vim.opt.cursorline = true -- カーソル行をハイライト
+vim.opt.signcolumn = "yes:1"
 vim.wo.number = true -- 行番号を表示
 
 
@@ -615,3 +675,4 @@ function enabled_osc52()
 	local is_remote = vim.env.SSH_CLIENT
 	return is_remote and (vim.env.DISPLAY == nil or vim.env.DISPLAY == "")
 end
+
